@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teoría Binaria</title>
+  <style>
+    /* Estilos básicos */
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #111;
+      color: #00ff00;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 50px;
+      font-size: 3em;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    #container {
+      margin: 20px;
+    }
+
+    input[type="text"] {
+      background-color: #222;
+      color: #00ff00;
+      border: 2px solid #00ff00;
+      padding: 10px;
+      font-size: 1.2em;
+      width: 70%;
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #00ff00;
+      color: #111;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #00cc00;
+    }
+
+    #resultado {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+
+    /* Animaciones de fondo */
+    @keyframes rainingBinary {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .binaryRain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .binaryRain div {
+      position: absolute;
+      font-size: 20px;
+      color: #00ff00;
+      animation: rainingBinary 1s linear infinite;
+    }
+  </style>
+</head>
+<body>
+  <h1>Teoría Binaria</h1>
+  <p>Convierte tu texto a binario y explora cómo las computadoras entienden la información.</p>
+
+  <div id="container">
+    <input type="text" id="texto" placeholder="Escribe algo aquí...">
+    <button onclick="convertir()">Convertir a Binario</button>
+    <p id="resultado"></p>
+  </div>
+
+  <!-- Animación de lluvia de binarios -->
+  <div class="binaryRain">
+    <div style="left: 10px; animation-duration: 5s;"></div>
+    <div style="left: 50px; animation-duration: 6s;"></div>
+    <div style="left: 100px; animation-duration: 7s;"></div>
+    <div style="left: 150px; animation-duration: 8s;"></div>
+    <div style="left: 200px; animation-duration: 5s;"></div>
+    <div style="left: 250px; animation-duration: 6s;"></div>
+    <div style="left: 300px; animation-duration: 7s;"></div>
+  </div>
+
+  <script>
+    function convertir() {
+      let texto = document.getElementById("texto").value;
+      let binario = "";
+      for (let i = 0; i < texto.length; i++) {
+        binario += texto[i].charCodeAt(0).toString(2).padStart(8, '0') + " ";
+      }
+      document.getElementById("resultado").innerText = binario || "Por favor, escribe algo para convertir.";
+    }
+
+    // Lluvia de binarios
+    function generarLluvia() {
+      const binaryRain = document.querySelector('.binaryRain');
+      setInterval(() => {
+        let binaryDrop = document.createElement('div');
+        binaryDrop.textContent = Math.random() < 0.5 ? '0' : '1';
+        binaryDrop.style.top = Math.random() * window.innerHeight + 'px';
+        binaryDrop.style.animationDuration = Math.random() * 5 + 5 + 's';
+        binaryRain.appendChild(binaryDrop);
+        setTimeout(() => binaryDrop.remove(), 7000);
+      }, 100);
+    }
+
+    generarLluvia();
+  </script>
+</body>
+</html>
